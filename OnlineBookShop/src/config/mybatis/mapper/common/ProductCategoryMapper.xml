@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.you.a.dao.common.ProductCategoryDao">
+  
+  	<insert id="add" parameterType="com.you.a.entity.common.ProductCategory">
+  		insert into product_category(id,parentId,name,tags,remark) values(null,#{parentId},#{name},#{tags},#{remark})
+  	</insert>
+  	
+  	<update id="edit" parameterType="com.you.a.entity.common.ProductCategory">
+  		update product_category set parentId=#{parentId},name=#{name},tags=#{tags},remark=#{remark} where id=#{id}
+  	</update>
+  	
+  	<select id="findList" parameterType="Map" resultType="com.you.a.entity.common.ProductCategory">
+  		select * from product_category 
+  		<if test="name != null">
+  			where name like '%${name}%' 
+  		</if>
+  		<if test="offset != null and pageSize != null">
+  			limit #{offset},#{pageSize}
+  		</if>
+  	</select>
+  	
+  	<select id="getTotal" parameterType="Map" resultType="Integer">
+  		select count(*) from product_category 
+  		<if test="name != null">
+  			where name like '%${name}%' 
+  		</if>
+  	</select>
+  	
+  	<select id="findById" parameterType="Long" resultType="com.you.a.entity.common.ProductCategory">
+  		select * from product_category where id=#{value}
+  	</select>
+  	
+  	<delete id="delete" parameterType="String">
+  		delete from product_category where id in(${value})
+  	</delete>
+  </mapper>
