@@ -216,4 +216,17 @@ public class HomeOrderController {
 		ret.put("type", "success");
 		return ret;
 	}
+	
+	@RequestMapping(value = "/cancel_order_finish",method = RequestMethod.POST)
+	@ResponseBody
+	public void cancelOrderFinish(Long id) {
+		Order order = orderService.findById(id);
+		List<OrderItem> orderItems = orderService.findOrderItemList(id);
+		for(OrderItem orderItem:orderItems) {
+			Product product = productService.findById(orderItem.getProductId());
+			int num = orderItem.getNum()+product.getStock();
+			product.setStock(num);
+			productService.edit(product);
+		}
+	}
 }

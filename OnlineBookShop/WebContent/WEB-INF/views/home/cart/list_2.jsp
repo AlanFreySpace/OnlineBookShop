@@ -195,6 +195,7 @@
 			money=Math.floor(money*100)/100;
 			$(this).closest(".gwc_list_shuliang").next(".gwc_list_xiaoji").find(".good_xiaojis").text(money);
 			calTotalMoney();
+			window.location.reload();
 		});
 		$(".good_num_jia").click(function(){
 			var num=parseInt($(this).prev('input').val());
@@ -205,6 +206,7 @@
 			money=Math.floor(money*100)/100;
 			$(this).closest(".gwc_list_shuliang").next(".gwc_list_xiaoji").find(".good_xiaojis").text(money);
 			calTotalMoney();
+			window.location.reload();
 		});
 		$(".cart_delete_btn").click(function(){
 			var cid=$(this).attr('cid');

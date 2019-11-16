@@ -56,7 +56,7 @@ public class CartController {
 		for(Cart cart:cartList) {
 			Product product = productService.findById(cart.getProductId());
 			if(product.getProductCategoryId()==123) {
-				total+=product.getPrice();
+				total+=cart.getMoney();
 			}
 		}
 		if(total>=99) {
@@ -81,7 +81,7 @@ public class CartController {
 		for(Cart cart:cartList) {
 			Product product = productService.findById(cart.getProductId());
 			if(product.getProductCategoryId()==123) {
-				total+=product.getPrice();
+				total+=cart.getMoney();
 			}
 		}
 		if(total>=99) {

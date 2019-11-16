@@ -1,6 +1,7 @@
 package com.you.a.controller.admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -14,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.you.a.entity.common.Account;
 import com.you.a.entity.common.Order;
+import com.you.a.entity.common.OrderItem;
+import com.you.a.entity.common.Product;
 import com.you.a.page.admin.Page;
 import com.you.a.service.common.AccountService;
 import com.you.a.service.common.OrderService;
+import com.you.a.service.common.ProductService;
 
 import net.sf.json.JSONArray;
 
@@ -30,6 +34,9 @@ public class OrderController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired 
+	private ProductService productService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ModelAndView list(ModelAndView model) {
@@ -100,6 +107,17 @@ public class OrderController {
 			ret.put("type", "error");
 			ret.put("msg", "请填写订单金额！");
 			return ret;
+		}
+		if(order.getStatus()==4) {
+			List<OrderItem> orderItems = orderService.findOrderItemList(order.getId());
+			for(OrderItem orderItem:orderItems) {
+				Product product = productService.findById(orderItem.getProductId());
+				int stockNum = orderItem.getNum()+product.getStock();
+				int sellNum=product.getSellNum()-orderItem.getNum();
+				product.setSellNum(sellNum);
+				product.setStock(stockNum);
+				productService.updateNum(product);
+			}
 		}
 		if(orderService.edit(order)<=0) {
 			ret.put("type", "error");
