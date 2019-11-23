@@ -64,6 +64,13 @@ public class IndexController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/face_register",method = RequestMethod.GET)
+	public ModelAndView faceregister(ModelAndView model) {
+		model.addObject("title","人脸录入");
+		model.setViewName("home/index/registe");
+		return model;
+	}
+	
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> register(Account account,String code,HttpServletRequest request) {
@@ -109,6 +116,7 @@ public class IndexController {
 			ret.put("msg", "注册失败，请联系管理员");
 			return ret;
 		}
+		request.getSession().setAttribute("registeUser", account.getName());
 		ret.put("type", "success");
 		return ret;
 	}

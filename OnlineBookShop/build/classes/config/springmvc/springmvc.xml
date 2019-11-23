@@ -60,6 +60,7 @@
 			<mvc:mapping path="/order/*"/>
 			<mvc:mapping path="/address/*"/>
 			<mvc:mapping path="/comment/*"/>
+			<mvc:exclude-mapping path="/cart/registe.action"/>
 			<bean class="com.you.a.interceptor.home.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> 

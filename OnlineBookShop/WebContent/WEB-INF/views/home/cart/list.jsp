@@ -73,7 +73,7 @@
 							<div class="clear"></div>
 							<div class="gwc_foot_links">
 								<a href="../home/index" class="go">继续购物</a>
-								<a href="list_2" class="op">确认并填写订单</a>
+								<a href="face_login" class="op">用户人脸验证</a>
 							</div>
 						</td>
 					</tr>

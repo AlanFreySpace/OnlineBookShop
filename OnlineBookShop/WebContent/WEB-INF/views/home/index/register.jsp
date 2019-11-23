@@ -120,8 +120,8 @@
 			dataType:'json',
 			success:function(data){
 				if(data.type=='success'){
-					alert('注册成功');
-					window.location.href='login';
+					alert('请您继续进行人脸注册，方便您购物结算');
+					window.location.href='face_register';
 				}else{
 					alert(data.msg);
 				}
